@@ -11,7 +11,7 @@ class Car(models.Model):
                                related_name='handled_cars')
     mark = models.ForeignKey('directory.Mark', on_delete=models.PROTECT, related_name='cars')
     year_issue = models.IntegerField()
-    legal_number = models.CharField(max_length=50)    
+    legal_number = models.CharField(max_length=50)
 
     def __str__(self):
         return self.legal_number

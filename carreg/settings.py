@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 3rd party dependencies
     'rest_framework',
+    'drf_yasg',
     # apps
     'cars',
     'directory',
