@@ -9,4 +9,4 @@ from cars.serializers import CarSerializer
 class CarViewSet(ModelViewSet):
     queryset = Car.objects.all()
     serializer_class = CarSerializer
-    permission_classes = [IsAuthenticated, DiversePermission, ]
+    permission_classes = [IsAuthenticated & DiversePermission, ]
