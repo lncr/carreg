@@ -9,8 +9,8 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
 import os
+
 import environ
 from pathlib import Path
 
@@ -30,7 +30,7 @@ SECRET_KEY = env.str('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -150,6 +150,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_BROKER_TRANSPORT = 'redis'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -158,6 +160,3 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
-CELERY_BROKER_TRANSPORT = 'redis'

@@ -1,12 +1,14 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
 from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework import status
 
 from cars.tasks import send_mail_to_worker
 from cars.models import Car
 from cars.permissions import DiversePermission
 from cars.serializers import CarSerializer
+from accounts.tasks import send_mail_to_worker
 
 
 class CarViewSet(ModelViewSet):

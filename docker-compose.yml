@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+  app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/code
+    command: >
+      sh -c "python3 manage.py migrate &&
+             python3 manage.py runserver 0.0.0.0:8000"
+
+    depends_on:
+      - db
+
+  redis:
+    image: redis:alpine
+  celery:
+    build:
+      context: .
+    restart: always
+    command: celery -A carreg worker -l info
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+      - redis
+      - app
+volumes:
+  pgdata:
